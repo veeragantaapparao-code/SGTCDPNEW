@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="te">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VAR ACADEMY – AP TET 2026 CDP CBT – 30 MCQs</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;600;700&display=swap');
+*{box-sizing:border-box}
+body{margin:0;background:#eef3f8;color:#17212b;font-family:'Noto Sans Telugu','Nirmala UI',sans-serif}
+.header{background:linear-gradient(135deg,#082b52,#0d4b78);color:#fff;padding:22px 16px;text-align:center}
+.brand{font-size:30px;font-weight:700;letter-spacing:1px}
+.title{font-size:18px;font-weight:600;margin-top:4px}
+.sub{font-size:14px;opacity:.9;margin-top:3px}
+.wrap{max-width:900px;margin:20px auto;padding:0 12px}
+.card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 5px 20px #00000012;margin-bottom:15px}
+.progress{height:9px;background:#dce5ed;border-radius:10px;overflow:hidden}
+.bar{height:100%;width:33.33%;background:#ef7d22;transition:.25s}
+.setnav{display:flex;gap:8px;margin:15px 0;flex-wrap:wrap}
+.setbtn{border:1px solid #b8c7d4;background:#fff;border-radius:8px;padding:9px 14px;font-weight:700;cursor:pointer}
+.setbtn.active{background:#0d4b78;color:#fff}
+.q{font-size:17px;font-weight:700;line-height:1.55;margin-bottom:12px}
+.option{display:block;border:1px solid #d4dee7;border-radius:9px;padding:10px 12px;margin:8px 0;cursor:pointer;line-height:1.45}
+.option:hover{background:#f5f9fc}
+.option input{margin-right:9px}
+.page{display:none}
+.page.active{display:block}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+button.action{background:#0d4b78;color:#fff;border:0;border-radius:9px;padding:11px 18px;font-size:15px;font-weight:700;cursor:pointer}
+button.action.secondary{background:#6b7785}
+#submit{background:#d94f1f;width:100%;font-size:17px;padding:14px;margin-top:18px}
+.result{display:none;background:#fff;border-radius:14px;padding:22px;box-shadow:0 5px 20px #0002;margin-top:18px}
+.score{font-size:28px;font-weight:700;color:#0d4b78;text-align:center}
+.review{margin-top:15px;border-top:1px solid #ddd;padding-top:10px}
+.correct{color:#157347;font-weight:700}
+.wrong{color:#c0392b;font-weight:700}
+.explain{font-size:13px;line-height:1.55;background:#f7fafc;padding:9px;border-radius:8px;margin-top:6px}
+.footer{text-align:center;font-size:12px;color:#667;padding:18px}
+@media(max-width:600px){.brand{font-size:25px}.q{font-size:16px}.card{padding:15px}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="brand">VAR ACADEMY</div>
+  <div class="title">AP TET 2026 • CHILD DEVELOPMENT & PEDAGOGY</div>
+  <div class="sub">Interactive CBT – 30 MCQs</div>
+</div>
+<div class="wrap">
+  <div class="card">
+    <div><b>Test Progress</b> <span id="count">1–10 / 30</span></div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="setnav">
+      <button class="setbtn active" onclick="showPage(0)">1–10</button>
+      <button class="setbtn" onclick="showPage(1)">11–20</button>
+      <button class="setbtn" onclick="showPage(2)">21–30</button>
+    </div>
+  </div>
+  <div id="quiz"></div>
+  <button id="submit" class="action" onclick="submitTest()">SUBMIT TEST</button>
+  <div id="result" class="result"></div>
+  <div class="footer">VAR ACADEMY • AP TET 2026 • CDP</div>
+</div>
+
+<script>
+const data = [{"q": "బాల వికాసం (Child Development) అంటే ప్రధానంగా ఏమిటి?", "opts": ["పిల్లల శారీరక పెరుగుదల మాత్రమే", "పిల్లల శారీరక, మానసిక, సామాజిక, భావోద్వేగ, భాషా తదితర రంగాల అభివృద్ధి", "పరీక్ష మార్కుల పెరుగుదల మాత్రమే", "బరువు మరియు ఎత్తు మార్పులు మాత్రమే"], "ans": 1, "exp": "బాల వికాసం అనేది శారీరకంతో పాటు మానసిక, సామాజిక, భావోద్వేగ, భాషా మొదలైన అనేక రంగాల అభివృద్ధిని సూచిస్తుంది."}, {"q": "Growth మరియు Development మధ్య సరైన సంబంధం ఏది?", "opts": ["Growth అనేది Development కంటే విస్తృతమైనది", "Development కేవలం శారీరక మార్పులే", "Growth, Developmentలో ఒక భాగం; Development విస్తృతమైన భావన", "రెండూ పూర్తిగా ఒకటే"], "ans": 2, "exp": "Growth ప్రధానంగా పరిమాణాత్మక శారీరక మార్పులను సూచిస్తుంది; Development మరింత విస్తృతమైన పరిమాణాత్మక + గుణాత్మక మార్పులను కలిగి ఉంటుంది."}, {"q": "కింది వాటిలో Development యొక్క సరైన లక్షణం ఏది?", "opts": ["అది ఒకే వయస్సులో అందరికీ ఒకే విధంగా జరుగుతుంది", "అది నిరంతర మరియు క్రమబద్ధమైన ప్రక్రియ", "అది శారీరక రంగానికే పరిమితం", "అది పరీక్షల ద్వారా మాత్రమే తెలుస్తుంది"], "ans": 1, "exp": "వికాసం నిరంతరంగా, సాధారణంగా ఒక క్రమాన్ని అనుసరిస్తూ జరుగుతుంది; అయితే పిల్లల వేగంలో వ్యక్తిగత భేదాలు ఉంటాయి."}, {"q": "‘Simple → Complex’ అనే వికాస సూత్రం ఏమి సూచిస్తుంది?", "opts": ["సంక్లిష్ట నైపుణ్యాలకు ముందు సరళమైన నైపుణ్యాలు పునాది అవుతాయి", "అన్ని పిల్లలు ఒకే వేగంతో నేర్చుకుంటారు", "వికాసం ఆగిపోతుంది", "పర్యావరణం ప్రభావం ఉండదు"], "ans": 0, "exp": "సరళమైన నైపుణ్యాలు తరువాత అభివృద్ధి చెందే సంక్లిష్ట నైపుణ్యాలకు పునాదిగా పనిచేస్తాయి."}, {"q": "కింది వాటిలో జ్ఞానాత్మక (Cognitive) వికాసానికి చెందినది ఏది?", "opts": ["ఎత్తు", "జ్ఞాపకం మరియు తర్కం", "బరువు", "కండరాల బలం"], "ans": 1, "exp": "ఆలోచన, జ్ఞాపకం, తర్కం, సమస్య పరిష్కారం వంటి అంశాలు జ్ఞానాత్మక వికాసంలో భాగాలు."}, {"q": "కింది వాటిలో సామాజిక వికాసానికి సరైన ఉదాహరణ ఏది?", "opts": ["ఎత్తు పెరగడం", "స్నేహితులతో సహకరించడం", "జ్ఞాపకశక్తి పెరగడం", "చదవడం నేర్చుకోవడం"], "ans": 1, "exp": "సహకారం, సంభాషణ, స్నేహ సంబంధాలు సామాజిక వికాసానికి సంబంధించినవి."}, {"q": "వికాసాన్ని ప్రభావితం చేసే ముఖ్యమైన రెండు అంశాలు ఏవి?", "opts": ["పుస్తకాలు మరియు పరీక్షలు", "వంశపారంపర్యం మరియు పర్యావరణం", "వయస్సు మరియు మార్కులు మాత్రమే", "శిక్ష మరియు బహుమతి మాత్రమే"], "ans": 1, "exp": "వంశపారంపర్య సామర్థ్యం మరియు పర్యావరణ అనుభవాలు పరస్పరం కలిసి వికాసాన్ని ప్రభావితం చేస్తాయి."}, {"q": "ఉపాధ్యాయుడు పిల్లవాడిని ‘తక్కువ తెలివి’ అని లేబుల్ చేయకుండా ఏమి ఆలోచించాలి?", "opts": ["ఎలా శిక్షించాలి?", "ఎలా ఇతరులతో పోల్చాలి?", "ఈ పిల్లవాడికి ఏ సహాయం మరియు అభ్యసన అవకాశం అవసరం?", "ఎలా తరగతి నుంచి తొలగించాలి?"], "ans": 2, "exp": "వ్యక్తిగత భేదాలను గౌరవిస్తూ అవసరమైన సహాయం మరియు అభ్యసన అవకాశాలను అందించడం సరైన విధానం."}, {"q": "Individual Differences అంటే ఏమిటి?", "opts": ["అన్ని పిల్లలు ఒకేలా ఉండటం", "పిల్లల తెలివి, వేగం, ఆసక్తులు, సామర్థ్యాలలో భేదాలు ఉండటం", "వయస్సు మాత్రమే మారటం", "పాఠశాలలు వేర్వేరు కావడం"], "ans": 1, "exp": "పిల్లలు అభ్యసన వేగం, ఆసక్తులు, సామర్థ్యం, వ్యక్తిత్వం, భాషా నైపుణ్యాలు మొదలైన వాటిలో భిన్నంగా ఉంటారు."}, {"q": "బాలకేంద్రిత విద్యలో ఉపాధ్యాయుని ప్రధాన పాత్ర ఏది?", "opts": ["జ్ఞానానికి ఏకైక మూలంగా ఉండటం", "కేవలం ఉపన్యాసం ఇవ్వడం", "Facilitator మరియు Guideగా వ్యవహరించడం", "కేవలం పరీక్షలు నిర్వహించడం"], "ans": 2, "exp": "Child-centred educationలో ఉపాధ్యాయుడు Facilitator, Guide, Mentorగా పనిచేస్తూ విద్యార్థి క్రియాశీల భాగస్వామ్యాన్ని ప్రోత్సహిస్తాడు."}, {"q": "శైశవ దశ (Infancy) సాధారణంగా ఏ వయస్సును సూచిస్తుంది?", "opts": ["0–2 సంవత్సరాలు", "2–6 సంవత్సరాలు", "6–11 సంవత్సరాలు", "12–18 సంవత్సరాలు"], "ans": 0, "exp": "సాధారణంగా 0–2 సంవత్సరాలను శైశవ దశగా పేర్కొంటారు."}, {"q": "‘Multidimensional Development’ అంటే ఏమిటి?", "opts": ["ఒకే రంగంలో వికాసం", "అనేక పరస్పర సంబంధిత రంగాల్లో వికాసం", "శారీరక వికాసం మాత్రమే", "పరీక్ష ఫలితాల ఆధారంగా వికాసం"], "ans": 1, "exp": "శారీరక, జ్ఞానాత్మక, భాషా, సామాజిక, భావోద్వేగ తదితర రంగాలు పరస్పరం ప్రభావితం చేస్తూ అభివృద్ధి చెందుతాయి."}, {"q": "జ్ఞానాత్మక వికాసాన్ని మెరుగుపరచడానికి ఏ కార్యకలాపం ఉత్తమం?", "opts": ["కేవలం కంఠస్థం చేయించడం", "పజిల్స్, ప్రశ్నలు, ప్రయోగాలు మరియు సమస్య పరిష్కారం", "నిశ్శబ్దంగా కూర్చోబెట్టడం", "శిక్షించడం"], "ans": 1, "exp": "పజిల్స్, ప్రశ్నలు, ప్రయోగాలు, నిజజీవిత సమస్యలు ఆలోచన, తర్కం మరియు సమస్య పరిష్కారాన్ని అభివృద్ధి చేస్తాయి."}, {"q": "Piaget ప్రధానంగా ఏ వికాస సిద్ధాంతంతో సంబంధం కలిగి ఉన్నాడు?", "opts": ["నైతిక వికాసం", "జ్ఞానాత్మక వికాసం", "శారీరక వికాసం", "భాషా బోధనా సిద్ధాంతం"], "ans": 1, "exp": "Piaget = Cognitive Development."}, {"q": "Piaget ప్రకారం 2–7 సంవత్సరాల దశ ఏది?", "opts": ["Sensorimotor", "Preoperational", "Concrete Operational", "Formal Operational"], "ans": 1, "exp": "2–7 సంవత్సరాలు Preoperational దశ. ఇందులో symbolic thought, language, imagination మరియు egocentrism ముఖ్యమైనవి."}, {"q": "Piaget ప్రకారం 7–11 సంవత్సరాల దశ ఏది?", "opts": ["Sensorimotor", "Preoperational", "Concrete Operational", "Formal Operational"], "ans": 2, "exp": "7–11 సంవత్సరాల దశ Concrete Operational. ఈ దశలో concrete objectsతో తార్కిక ఆలోచన అభివృద్ధి చెందుతుంది."}, {"q": "కొత్త అనుభవాన్ని ఇప్పటికే ఉన్న Schemaలో చేర్చడాన్ని Piaget ఏమని అన్నాడు?", "opts": ["Accommodation", "Assimilation", "Scaffolding", "Equilibration"], "ans": 1, "exp": "Assimilation అంటే కొత్త అనుభవాన్ని ఇప్పటికే ఉన్న Schemaలో సరిపెట్టడం."}, {"q": "కొత్త సమాచారానికి అనుగుణంగా ఉన్న Schemaను మార్చడాన్ని ఏమంటారు?", "opts": ["Assimilation", "Accommodation", "MKO", "Motivation"], "ans": 1, "exp": "Accommodation అంటే కొత్త సమాచారాన్ని అర్థం చేసుకోవడానికి ఉన్న Schemaను మార్చడం."}, {"q": "Vygotsky సిద్ధాంతంలోని ZPD యొక్క సరైన అర్థం ఏది?", "opts": ["పిల్లవాడు ఎప్పటికీ చేయలేని పని", "సహాయంతో చేయగలిగే పనుల పరిధి", "కేవలం పరీక్షలో సాధించే మార్కులు", "శారీరక పెరుగుదల పరిధి"], "ans": 1, "exp": "ZPD అంటే పిల్లవాడు స్వతంత్రంగా చేయగలిగేదానికంటే సహాయంతో మరింత చేయగలిగే పరిధి."}, {"q": "Scaffolding అంటే ఏమిటి?", "opts": ["శాశ్వతంగా సహాయం చేయడం", "తాత్కాలిక సహాయాన్ని అందించి సామర్థ్యం పెరిగేకొద్దీ తగ్గించడం", "పిల్లవాడిని శిక్షించడం", "పరీక్ష మార్కులు పెంచడం"], "ans": 1, "exp": "Scaffolding అనేది తాత్కాలిక సహాయం; అభ్యాసకుని సామర్థ్యం పెరిగినప్పుడు ఆ సహాయాన్ని క్రమంగా తగ్గిస్తారు."}, {"q": "Vygotsky సిద్ధాంతంలో MKO ఎవరు కావచ్చు?", "opts": ["కేవలం ప్రధానోపాధ్యాయుడు", "కేవలం తల్లిదండ్రులు", "ఉపాధ్యాయుడు, సహచరుడు లేదా ఎక్కువ సామర్థ్యం ఉన్న వ్యక్తి", "కేవలం పరీక్ష నిర్వాహకుడు"], "ans": 2, "exp": "MKO (More Knowledgeable Other)గా ఉపాధ్యాయుడు, సహచరుడు లేదా ఎక్కువ సామర్థ్యం ఉన్న వ్యక్తి ఉండవచ్చు."}, {"q": "Kohlberg ప్రధానంగా ఏ వికాసంతో సంబంధం కలిగి ఉన్నాడు?", "opts": ["జ్ఞానాత్మక వికాసం", "నైతిక వికాసం", "శారీరక వికాసం", "భాషా వికాసం"], "ans": 1, "exp": "Kohlberg = Moral Reasoning Development."}, {"q": "Kohlberg యొక్క Pre-Conventional స్థాయిలో నైతిక నిర్ణయాలు ప్రధానంగా దేనిపై ఆధారపడతాయి?", "opts": ["విశ్వవ్యాప్త నైతిక సూత్రాలు", "శిక్ష మరియు వ్యక్తిగత ప్రయోజనం", "సామాజిక ఒప్పందం", "అమూర్త తర్కం"], "ans": 1, "exp": "Pre-Conventional స్థాయిలో శిక్షను తప్పించుకోవడం మరియు వ్యక్తిగత ప్రయోజనం ముఖ్యమైనవి."}, {"q": "Kohlberg యొక్క Conventional స్థాయిలో ముఖ్యమైనది ఏది?", "opts": ["శిక్ష మాత్రమే", "సామాజిక ఆమోదం మరియు సామాజిక క్రమం", "వ్యక్తిగత లాభం మాత్రమే", "కేవలం జీవశాస్త్రీయ మార్పులు"], "ans": 1, "exp": "Conventional స్థాయిలో సంబంధాలు, సామాజిక ఆమోదం మరియు Law & Order ముఖ్యమైనవి."}, {"q": "Intrinsic Motivation అంటే ఏమిటి?", "opts": ["బహుమతి కోసం నేర్చుకోవడం", "శిక్ష భయంతో నేర్చుకోవడం", "ఆసక్తి లేదా అంతర్గత సంతృప్తి కోసం నేర్చుకోవడం", "మార్కుల కోసం మాత్రమే నేర్చుకోవడం"], "ans": 2, "exp": "Intrinsic motivationలో పని లేదా అభ్యసనపట్ల అంతర్గత ఆసక్తి మరియు సంతృప్తి ప్రధాన కారణాలు."}, {"q": "Extrinsic Motivationకు ఉదాహరణ ఏది?", "opts": ["విషయం పట్ల సహజమైన ఆసక్తి", "సమస్యను పరిష్కరించడం వల్ల కలిగే సంతృప్తి", "బహుమతి లేదా మార్కుల కోసం నేర్చుకోవడం", "కొత్త విషయం తెలుసుకోవాలనే ఆసక్తి"], "ans": 2, "exp": "Extrinsic motivation బాహ్య బహుమతులు, మార్కులు, బహిరంగ ప్రోత్సాహం వంటి కారణాలపై ఆధారపడుతుంది."}, {"q": "Inclusive Education యొక్క ప్రధాన లక్ష్యం ఏది?", "opts": ["కొంతమంది పిల్లలను వేరు చేయడం", "అన్ని అభ్యాసకుల అర్థవంతమైన భాగస్వామ్యాన్ని నిర్ధారించడం", "కేవలం అధిక మార్కులు పొందేవారిని బోధించడం", "అందరికీ ఒకే పద్ధతిని బలవంతంగా అమలు చేయడం"], "ans": 1, "exp": "Inclusive educationలో అన్ని రకాల అభ్యాసకులు పాల్గొనేలా తగిన సహాయం మరియు అవకాశాలు కల్పిస్తారు."}, {"q": "Equity అంటే తరగతి గదిలో ఏమిటి?", "opts": ["అందరికీ తప్పనిసరిగా ఒకే సహాయం", "అవసరానికి అనుగుణంగా తగిన సహాయం అందించడం", "ఎవరికి సహాయం చేయకపోవడం", "కేవలం ప్రతిభావంతులకు సహాయం చేయడం"], "ans": 1, "exp": "Equity అంటే ప్రతి అభ్యాసకుని అవసరాన్ని బట్టి తగిన సహాయం అందించడం."}, {"q": "కింది జంటల్లో సరైనది ఏది?", "opts": ["Piaget – ZPD", "Vygotsky – Moral Development", "Kohlberg – Moral Development", "Kohlberg – Cognitive Development"], "ans": 2, "exp": "Kohlberg నైతిక తార్కికత/నైతిక వికాసంతో సంబంధం కలిగి ఉన్నాడు."}, {"q": "AP TETలో బాల వికాసంపై సరైన Golden Rule ఏది?", "opts": ["అన్ని పిల్లలను ఒకే విధంగా బోధించాలి", "పిల్లలను పోల్చి శిక్షించాలి", "పిల్లలు ఎలా నేర్చుకుంటారో అర్థం చేసుకుని, భేదాలను గౌరవించి, అర్థవంతమైన అభ్యసనాన్ని సులభతరం చేయాలి", "కేవలం కంఠస్థంపై ఆధారపడాలి"], "ans": 2, "exp": "CDPలో ప్రధాన భావన: పిల్లల అభ్యసన విధానాన్ని అర్థం చేసుకోవడం, వ్యక్తిగత భేదాలను గౌరవించడం, meaningful learningను సులభతరం చేయడం."}];
+let current=0;
+const selected = Array(30).fill(null);
+
+function render(){
+ const quiz=document.getElementById('quiz'); quiz.innerHTML='';
+ for(let page=0;page<3;page++){
+   const div=document.createElement('div'); div.className='page'+(page===0?' active':''); div.id='page'+page;
+   const start=page*10,end=start+10;
+   for(let i=start;i<end;i++){
+     const item=data[i];
+     let opts='';
+     item.opts.forEach((o,j)=>{
+       const checked=selected[i]===j?'checked':'';
+       opts+=`<label class="option"><input type="radio" name="q${i}" value="${j}" ${checked} onchange="selected[${i}]=${j}">${String.fromCharCode(65+j)}. ${o}</label>`;
+     });
+     div.innerHTML+=`<div class="card"><div class="q">${i+1}. ${item.q}</div>${opts}</div>`;
+   }
+   const actions=document.createElement('div'); actions.className='actions';
+   actions.innerHTML = page>0 ? `<button class="action secondary" onclick="showPage(${page-1})">← PREVIOUS</button>` : `<span></span>`;
+   actions.innerHTML += page<2 ? `<button class="action" onclick="showPage(${page+1})">NEXT 10 →</button>` : `<span></span>`;
+   div.appendChild(actions); quiz.appendChild(div);
+ }
+}
+function showPage(p){
+ current=p;
+ document.querySelectorAll('.page').forEach((x,i)=>x.classList.toggle('active',i===p));
+ document.querySelectorAll('.setbtn').forEach((x,i)=>x.classList.toggle('active',i===p));
+ document.getElementById('count').textContent=(p*10+1)+'–'+(p*10+10)+' / 30';
+ document.getElementById('bar').style.width=((p+1)*33.333)+'%';
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function submitTest(){
+ let score=0, answered=0;
+ selected.forEach((v,i)=>{if(v!==null) answered++; if(v===data[i].ans) score++;});
+ let out=`<div class="score">మీ స్కోర్: ${score} / 30</div>`;
+ out+=`<p style="text-align:center"><b>Answered:</b> ${answered} / 30 &nbsp; | &nbsp; <b>Not Answered:</b> ${30-answered}</p>`;
+ out+=`<div class="review"><h3>Correct Choices & Explanations</h3>`;
+ data.forEach((item,i)=>{
+   const chosen=selected[i];
+   const ok=chosen===item.ans;
+   out+=`<div style="padding:10px 0;border-bottom:1px solid #eee">
+   <b>${i+1}. ${item.q}</b><br>
+   <span class="${ok?'correct':'wrong'}">${ok?'✓ Correct':'✗ Incorrect / Not Answered'}</span><br>
+   <b>Correct Choice: ${String.fromCharCode(65+item.ans)}. ${item.opts[item.ans]}</b>
+   ${chosen!==null && !ok ? `<br>Your Choice: ${String.fromCharCode(65+chosen)}. ${item.opts[chosen]}` : ''}
+   <div class="explain">${item.exp}</div>
+   </div>`;
+ });
+ out+=`</div>`;
+ const r=document.getElementById('result'); r.innerHTML=out; r.style.display='block';
+ r.scrollIntoView({behavior:'smooth'});
+}
+render();
+</script>
+</body>
+</html>
